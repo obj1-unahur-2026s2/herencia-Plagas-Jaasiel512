@@ -1,9 +1,32 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+describe "Test de Plagas"{
+  const hogar1 = new Hogar(nivelDeMugre = 3, confort = 8)
+  const hogar2 = new Hogar(nivelDeMugre = 7, confort = 4)
+  const huerta1 = new Huerta(capacidadDeProduccion = 50, nivel = 25)
+  const huerta2 = new Huerta(capacidadDeProduccion = 15, nivel = 30)
+  const mascota1 = new Mascota(nivelDeSalud = 300)
+  const mascota2 = new Mascota()
+  const barrio1 = new Barrio()
+  const pulgas1 = new Pulga(poblacion = 10)
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  method initialize(){
+    barrio1.agregarElemento(hogar1)
+    barrio1.agregarElemento(huerta1)
+    barrio1.agregarElemento(mascota2)
   }
-
+  test "Un hogar con un nivel de mugre de 3 y confort igual a 8 es bueno para la vida"{
+    assert.that(hogar1.esBuenoParaLaVida())
+  }
+  test "Un barrio con 2 cosas buenas para la vida y 1 mala es copado"{
+    assert.that(barrio1.esCopado())
+  }
+  test "Una poblacion de 10 pulgas equivale a un nivel de danio de 20 y trasmiten enfermedades"{
+    assert.equals(pulgas1.nivelDeDanio(), 20)
+    assert.that(pulgas1.trasmitenEnfermedades())
+  }
+  test "Una mascota con 300 de vida recibe un ataque de 20 de una poblacion de 10 pulgas"{
+    pulgas1.atacarAElemento(mascota1)
+    assert.equals(mascota1.vida(), 280)
+  }
 }
